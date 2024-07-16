@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pythonproject31"
+version = "0.1.0"
+description = ""
+authors = ["speedfreak <gdramze@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+openmeteo-requests = "^1.2.0"
+requests-cache = "^1.2.1"
+retry-requests = "^2.0.0"
+numpy = "^2.0.0"
+pandas = "^2.2.2"
+django = "^5.0.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
