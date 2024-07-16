@@ -1,0 +1,15 @@
+{% extends 'users/base_users.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{title}}{% endblock %}
+{% block userscontent %}
+<form method="post">
+    <div class="container ms-5 mt-5">
+        {% csrf_token %}
+        <h4>Ты точно хочешь удалить свой аккаунт {{ user.email }}?</h4>
+        <div class="col mt-5">
+        <button class="btn btn-danger btn-sm" type="submit">Удалить</button>
+        <a href="{% url 'users:user_update' %}" class="btn btn-primary btn-sm">Назад</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

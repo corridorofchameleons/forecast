@@ -1,0 +1,39 @@
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+            {% if user.is_authenticated %}
+<!--            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="get"-->
+<!--                  action="{% url 'mailing:mailing_list' %}">-->
+<!--                <div class="container">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col col-8 pe-1">-->
+<!--                            <input type="search" class="form-control form-control-dark text-bg-dark"-->
+<!--                                   placeholder="Найти рассылку..." name="search"-->
+<!--                                   aria-label="Search">-->
+<!--                        </div>-->
+<!--                        <div class="col ps-0">-->
+<!--                            <button class="btn btn-secondary" type="submit">Поиск</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+            <div class="row text-end">
+                <div class="col"><a href="{% url 'users:user_update' %}" class="align-middle">{{ user.email }}</a></div>
+                <div class="col">
+                    <form method="post" action="{% url 'users:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="col btn btn-light">Выйти</button>
+                    </form>
+                </div>
+            </div>
+
+            {% else %}
+            <div class="text-end">
+                <a href="{% url 'users:login' %}" class="btn btn-info me-2">Войти</a>
+                <a href="{% url 'users:user_create' %}" class="btn btn-outline-light">Регистрация</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
