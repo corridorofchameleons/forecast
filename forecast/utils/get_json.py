@@ -39,7 +39,7 @@ class DataGetter:
         try:
             lat, lon, name = DataGetter.__get_coordinates(city)
         except TypeError:
-            lat, lon = None, None
+            lat, lon, name = None, None, 'undefined'
 
         if lat and lon:
             params = {
@@ -68,14 +68,15 @@ class DataGetter:
         if days > DataGetter.MAX_DAYS:
             days = DataGetter.MAX_DAYS
 
-        daily_min = DataGetter.__get_temp(city, days, 'min')[0]
-        daily_max, name = DataGetter.__get_temp(city, days, 'max')
-
-        if not daily_min or not daily_max:
-            return [('undefined', 'undefined')] * days
-
-        result = []
-        for i in range(days):
-            result.append((date + timedelta(i, days), int(daily_min.Variables(0).Values(i)), int(daily_max.Variables(0).Values(i))))
+        try:
+            daily_min = DataGetter.__get_temp(city, days, 'min')[0]
+            daily_max, name = DataGetter.__get_temp(city, days, 'min')
+            result = []
+            for i in range(days):
+                result.append((date + timedelta(i, days), int(daily_min.Variables(0).Values(i)),
+                               int(daily_max.Variables(0).Values(i))))
+        except:
+            result = [(date, 'undefined', 'undefined')]
+            name = 'undefined'
 
         return result, name

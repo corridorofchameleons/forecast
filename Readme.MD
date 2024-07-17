@@ -32,11 +32,14 @@
 **Запуск**
 
 ```commandline
-git init
-git clone https://github.com/corridorofchameleons/forecast
-poetry init
+mkdir django_forecast
+cd django_forecast
+
+git clone https://github.com/corridorofchameleons/forecast.git .
+
+poetry install --no-root
 poetry shell
-poetry install
+
 python3 manage.py migrate
 python3 manage.py runserver
 ```

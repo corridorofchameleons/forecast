@@ -26,12 +26,13 @@ def index(request):
             freq_req = FrequentRequest.objects.get(city=city_name)
             freq_req.count += 1
             freq_req.save()
-        else:
+        elif city_name != 'undefined':
             FrequentRequest.objects.create(city=city_name)
 
         # трекер пользовательских запросов
         if request.user.is_authenticated:
-            UserRequest.objects.create(city=city_name, user=request.user)
+            if city_name != 'undefined':
+                UserRequest.objects.create(city=city_name, user=request.user)
 
             # поскольку sqlite не поддерживает DISTINCT ON, делаем логику руками
             q = UserRequest.objects.filter(user=request.user).order_by('-request_date').values_list('city',
