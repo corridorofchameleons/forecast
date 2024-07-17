@@ -14,7 +14,7 @@ def index(request):
         'has_info': False
     }
 
-    if request.user:
+    if not request.user.is_anonymous:
         context['user_requests'] = UserRequest.objects.filter(user=request.user).order_by('-request_date')[:3]
 
     if city:
@@ -33,7 +33,7 @@ def index(request):
             FrequentRequest.objects.create(city=city_name)
 
         # трекер пользовательских запросов
-        if request.user:
+        if not request.user.is_anonymous:
             UserRequest.objects.create(city=city_name, user=request.user)
 
     return render(request, 'forecast/index.html', context)
