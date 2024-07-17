@@ -18,9 +18,9 @@
     </h2>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        {% for ur in user_requests %}
+        {% for uc in user_cities %}
         <li>
-            <a href="{% url 'forecast:index' %}?city={{ur.city}}">{{ ur.city }}</a>
+            <a href="{% url 'forecast:index' %}?city={{uc}}">{{ uc }}</a>
         </li>
         {% endfor %}
     </ul>

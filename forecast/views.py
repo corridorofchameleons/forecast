@@ -14,9 +14,6 @@ def index(request):
         'has_info': False
     }
 
-    if not request.user.is_anonymous:
-        context['user_requests'] = UserRequest.objects.filter(user=request.user).order_by('-request_date')[:3]
-
     if city:
         data, city_name = DataGetter.get_forecast(city, days)
 
@@ -33,7 +30,19 @@ def index(request):
             FrequentRequest.objects.create(city=city_name)
 
         # трекер пользовательских запросов
-        if not request.user.is_anonymous:
+        if request.user.is_authenticated:
             UserRequest.objects.create(city=city_name, user=request.user)
+
+            # поскольку sqlite не поддерживает DISTINCT ON, делаем логику руками
+            q = UserRequest.objects.filter(user=request.user).order_by('-request_date').values_list('city',
+                                                                                                    flat=True)
+            user_cities = set()
+            for s in q:
+                print(s, user_cities)
+                if len(user_cities) < 5:
+                    user_cities.add(s)
+                else:
+                    break
+            context['user_cities'] = user_cities
 
     return render(request, 'forecast/index.html', context)
