@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="col-8">
+{% if has_info %}
 <div class="container ms-5 mt-5">
     <h2>Weather in {{ city }}</h2>
 </div>
@@ -28,5 +29,6 @@
     </table>
 
 </div>
+{% endif %}
 </div>
 {% endblock %}

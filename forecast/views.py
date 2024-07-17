@@ -7,11 +7,16 @@ def index(request):
     city = request.GET.get('city')
     days = request.GET.get('days')
 
-    data, city_name = DataGetter.get_forecast(city, days)
-
     context = {
-        'data': data,
-        'city': city_name,
+        'title': 'Главная',
+        'has_info': False
     }
+
+    if city:
+        data, city_name = DataGetter.get_forecast(city, days)
+
+        context['data'] = data
+        context['city'] = city_name
+        context['has_info'] = True
 
     return render(request, 'forecast/index.html', context)

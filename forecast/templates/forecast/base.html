@@ -5,7 +5,7 @@
 <head>
     <script src="{% static 'js/color-modes.js' %}"></script>
 
-    <title>SFMailing::{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +20,10 @@
 
     <style>
         main {
+            margin: auto;
+            width: 1200px;
+        }
+        .my-content {
             min-height: 1000px;
         }
         .my-link {
@@ -111,14 +115,18 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/sidebars.css' %}" rel="stylesheet">
 </head>
-<body>
+<body >
+
+<main>
 
 {% include 'forecast/includes/header.html' %}
 
-<main class="d-flex flex-nowrap overflow-auto">
-
+<div class="my-content">
 {% block content %}
 {% endblock %}
+</div>
+
+{% include 'forecast/includes/footer.html' %}
 
 </main>
 
