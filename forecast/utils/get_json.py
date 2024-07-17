@@ -70,7 +70,7 @@ class DataGetter:
 
         try:
             daily_min = DataGetter.__get_temp(city, days, 'min')[0]
-            daily_max, name = DataGetter.__get_temp(city, days, 'min')
+            daily_max, name = DataGetter.__get_temp(city, days, 'max')
             result = []
             for i in range(days):
                 result.append((date + timedelta(i, days), int(daily_min.Variables(0).Values(i)),
