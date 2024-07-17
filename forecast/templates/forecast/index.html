@@ -1,4 +1,32 @@
 {% extends 'forecast/base.html' %}
 
+{% block title %}{{title}}{% endblock %}
+
 {% block content %}
+<div class="col-8">
+<div class="container ms-5 mt-5">
+    <h2>Weather in {{ city }}</h2>
+</div>
+<div class="container mt-5 ms-5">
+    <table class="table" style="width: 100%">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Lowest</th>
+            <th scope="col">Highest</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for d in data %}
+        <tr>
+            <td>{{ d.0|date:"M, d" }}</td>
+            <td>{{ d.1 }}</td>
+            <td>{{ d.2 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</div>
 {% endblock %}
