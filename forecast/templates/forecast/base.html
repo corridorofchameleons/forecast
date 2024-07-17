@@ -121,9 +121,13 @@
 
 {% include 'forecast/includes/header.html' %}
 
-<div class="my-content">
+<div class="my-content row">
+
+{% include 'forecast/includes/nav.html' %}
+
 {% block content %}
 {% endblock %}
+
 </div>
 
 {% include 'forecast/includes/footer.html' %}
